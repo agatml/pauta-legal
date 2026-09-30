@@ -115,7 +115,7 @@ function Diligencias() {
               </SelectContent>
             </Select>
           </div>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-2 gap-2 lg:col-span-2">
             <div className="grid gap-1.5">
               <Label htmlFor="de">De</Label>
               <Input
