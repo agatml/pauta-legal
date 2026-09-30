@@ -51,7 +51,7 @@ export function proximoStatus(
 ): StatusDiligencia | null {
   const i = FLUXO_STATUS.indexOf(status);
   if (i === -1 || i === FLUXO_STATUS.length - 1) return null;
-  return FLUXO_STATUS[i + 1];
+  return FLUXO_STATUS[i + 1] ?? null;
 }
 
 export function podeCancelar(status: StatusDiligencia): boolean {
