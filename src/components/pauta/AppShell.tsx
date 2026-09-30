@@ -12,7 +12,11 @@ const navItens = [
 
 function Marca() {
   return (
-    <div className="flex items-center gap-2.5">
+    <Link
+      to="/"
+      aria-label="Ir para o Painel"
+      className="flex items-center gap-2.5 rounded-lg"
+    >
       <span className="flex size-9 items-center justify-center rounded-xl bg-accent text-accent-foreground">
         <Scale className="size-5" />
       </span>
