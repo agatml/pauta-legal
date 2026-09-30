@@ -28,7 +28,7 @@ function Marca() {
           Audiências e diligências
         </span>
       </span>
-    </div>
+    </Link>
   );
 }
 
