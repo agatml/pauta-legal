@@ -73,7 +73,7 @@ function Diligencias() {
       acao={<NovaDiligenciaDialog />}
     >
       <div className="rounded-xl bg-card p-4 shadow-card">
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-6">
           <div className="grid gap-1.5 lg:col-span-2">
             <Label htmlFor="busca">Buscar</Label>
             <Input
