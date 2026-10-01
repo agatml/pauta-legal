@@ -5,7 +5,7 @@ import { DiligenciasList } from "@/components/pauta/DiligenciasList";
 import { EmptyState } from "@/components/pauta/EmptyState";
 import { usePauta } from "@/components/pauta/PautaProvider";
 
-export const Route = createFileRoute("/processos/$processoId")({
+export const Route = createFileRoute("/_authenticated/processos/$processoId")({
   head: () => ({
     meta: [
       { title: "Detalhe do processo — Pauta" },
