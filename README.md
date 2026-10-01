@@ -32,15 +32,13 @@ Protótipo de aplicação web para advogados e escritórios acompanharem **proce
 
 ## 🖼️ Telas
 
-> Adicione prints na pasta `docs/img/` e referencie aqui.
-
 | Painel | Diligências |
 |---|---|
-| `![Painel](images/painel-pauta.png)` | `![Diligências](images/diligencias-pauta.png)` |
+| `![Painel](docs/img/painel.png)` | `![Diligências](docs/img/diligencias.png)` |
 
 | Processos | Detalhe do processo |
 |---|---|
-| `![Processos](images/processos-pauta.png)` | `![Detalhe](images/detalhes-pauta.png)` |
+| `![Processos](docs/img/processos.png)` | `![Detalhe](docs/img/detalhe.png)` |
 
 ---
 
