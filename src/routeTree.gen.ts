@@ -9,21 +9,16 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as IndexRouteImport } from './routes/index'
-import { Route as DiligenciasRouteImport } from './routes/diligencias'
+import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as LoginRouteImport } from './routes/login'
-import { Route as ProcessosRouteImport } from './routes/processos'
-import { Route as ProcessosIndexRouteImport } from './routes/processos.index'
-import { Route as ProcessosProcessoIdRouteImport } from './routes/processos.$processoId'
+import { Route as AuthenticatedIndexRouteImport } from './routes/_authenticated/index'
+import { Route as AuthenticatedDiligenciasRouteImport } from './routes/_authenticated/diligencias'
+import { Route as AuthenticatedProcessosRouteImport } from './routes/_authenticated/processos'
+import { Route as AuthenticatedProcessosIndexRouteImport } from './routes/_authenticated/processos.index'
+import { Route as AuthenticatedProcessosProcessoIdRouteImport } from './routes/_authenticated/processos.$processoId'
 
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const DiligenciasRoute = DiligenciasRouteImport.update({
-  id: '/diligencias',
-  path: '/diligencias',
+const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
+  id: '/_authenticated',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -31,88 +26,94 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ProcessosRoute = ProcessosRouteImport.update({
-  id: '/processos',
-  path: '/processos',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ProcessosIndexRoute = ProcessosIndexRouteImport.update({
+const AuthenticatedIndexRoute = AuthenticatedIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => ProcessosRoute,
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
-const ProcessosProcessoIdRoute = ProcessosProcessoIdRouteImport.update({
-  id: '/$processoId',
-  path: '/$processoId',
-  getParentRoute: () => ProcessosRoute,
+const AuthenticatedDiligenciasRoute =
+  AuthenticatedDiligenciasRouteImport.update({
+    id: '/diligencias',
+    path: '/diligencias',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
+const AuthenticatedProcessosRoute = AuthenticatedProcessosRouteImport.update({
+  id: '/processos',
+  path: '/processos',
+  getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedProcessosIndexRoute =
+  AuthenticatedProcessosIndexRouteImport.update({
+    id: '/',
+    path: '/',
+    getParentRoute: () => AuthenticatedProcessosRoute,
+  } as any)
+const AuthenticatedProcessosProcessoIdRoute =
+  AuthenticatedProcessosProcessoIdRouteImport.update({
+    id: '/$processoId',
+    path: '/$processoId',
+    getParentRoute: () => AuthenticatedProcessosRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/diligencias': typeof DiligenciasRoute
+  '/': typeof AuthenticatedIndexRoute
   '/login': typeof LoginRoute
-  '/processos': typeof ProcessosRouteWithChildren
-  '/processos/$processoId': typeof ProcessosProcessoIdRoute
-  '/processos/': typeof ProcessosIndexRoute
+  '/diligencias': typeof AuthenticatedDiligenciasRoute
+  '/processos': typeof AuthenticatedProcessosRouteWithChildren
+  '/processos/$processoId': typeof AuthenticatedProcessosProcessoIdRoute
+  '/processos/': typeof AuthenticatedProcessosIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/diligencias': typeof DiligenciasRoute
   '/login': typeof LoginRoute
-  '/processos/$processoId': typeof ProcessosProcessoIdRoute
-  '/processos': typeof ProcessosIndexRoute
+  '/diligencias': typeof AuthenticatedDiligenciasRoute
+  '/': typeof AuthenticatedIndexRoute
+  '/processos/$processoId': typeof AuthenticatedProcessosProcessoIdRoute
+  '/processos': typeof AuthenticatedProcessosIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/diligencias': typeof DiligenciasRoute
+  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/login': typeof LoginRoute
-  '/processos': typeof ProcessosRouteWithChildren
-  '/processos/$processoId': typeof ProcessosProcessoIdRoute
-  '/processos/': typeof ProcessosIndexRoute
+  '/_authenticated/diligencias': typeof AuthenticatedDiligenciasRoute
+  '/_authenticated/processos': typeof AuthenticatedProcessosRouteWithChildren
+  '/_authenticated/': typeof AuthenticatedIndexRoute
+  '/_authenticated/processos/$processoId': typeof AuthenticatedProcessosProcessoIdRoute
+  '/_authenticated/processos/': typeof AuthenticatedProcessosIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
-    | '/diligencias'
     | '/login'
+    | '/diligencias'
     | '/processos'
     | '/processos/$processoId'
     | '/processos/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/diligencias' | '/login' | '/processos/$processoId' | '/processos'
+  to: '/login' | '/diligencias' | '/' | '/processos/$processoId' | '/processos'
   id:
     | '__root__'
-    | '/'
-    | '/diligencias'
+    | '/_authenticated'
     | '/login'
-    | '/processos'
-    | '/processos/$processoId'
-    | '/processos/'
+    | '/_authenticated/diligencias'
+    | '/_authenticated/processos'
+    | '/_authenticated/'
+    | '/_authenticated/processos/$processoId'
+    | '/_authenticated/processos/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  DiligenciasRoute: typeof DiligenciasRoute
+  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   LoginRoute: typeof LoginRoute
-  ProcessosRoute: typeof ProcessosRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
+    '/_authenticated': {
+      id: '/_authenticated'
+      path: ''
       fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/diligencias': {
-      id: '/diligencias'
-      path: '/diligencias'
-      fullPath: '/diligencias'
-      preLoaderRoute: typeof DiligenciasRouteImport
+      preLoaderRoute: typeof AuthenticatedRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -122,49 +123,79 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/processos': {
-      id: '/processos'
+    '/_authenticated/': {
+      id: '/_authenticated/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof AuthenticatedIndexRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/diligencias': {
+      id: '/_authenticated/diligencias'
+      path: '/diligencias'
+      fullPath: '/diligencias'
+      preLoaderRoute: typeof AuthenticatedDiligenciasRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
+    '/_authenticated/processos': {
+      id: '/_authenticated/processos'
       path: '/processos'
       fullPath: '/processos'
-      preLoaderRoute: typeof ProcessosRouteImport
-      parentRoute: typeof rootRouteImport
+      preLoaderRoute: typeof AuthenticatedProcessosRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
     }
-    '/processos/': {
-      id: '/processos/'
+    '/_authenticated/processos/': {
+      id: '/_authenticated/processos/'
       path: '/'
       fullPath: '/processos/'
-      preLoaderRoute: typeof ProcessosIndexRouteImport
-      parentRoute: typeof ProcessosRoute
+      preLoaderRoute: typeof AuthenticatedProcessosIndexRouteImport
+      parentRoute: typeof AuthenticatedProcessosRoute
     }
-    '/processos/$processoId': {
-      id: '/processos/$processoId'
+    '/_authenticated/processos/$processoId': {
+      id: '/_authenticated/processos/$processoId'
       path: '/$processoId'
       fullPath: '/processos/$processoId'
-      preLoaderRoute: typeof ProcessosProcessoIdRouteImport
-      parentRoute: typeof ProcessosRoute
+      preLoaderRoute: typeof AuthenticatedProcessosProcessoIdRouteImport
+      parentRoute: typeof AuthenticatedProcessosRoute
     }
   }
 }
 
-interface ProcessosRouteChildren {
-  ProcessosProcessoIdRoute: typeof ProcessosProcessoIdRoute
-  ProcessosIndexRoute: typeof ProcessosIndexRoute
+interface AuthenticatedProcessosRouteChildren {
+  AuthenticatedProcessosProcessoIdRoute: typeof AuthenticatedProcessosProcessoIdRoute
+  AuthenticatedProcessosIndexRoute: typeof AuthenticatedProcessosIndexRoute
 }
 
-const ProcessosRouteChildren: ProcessosRouteChildren = {
-  ProcessosProcessoIdRoute: ProcessosProcessoIdRoute,
-  ProcessosIndexRoute: ProcessosIndexRoute,
+const AuthenticatedProcessosRouteChildren: AuthenticatedProcessosRouteChildren =
+  {
+    AuthenticatedProcessosProcessoIdRoute:
+      AuthenticatedProcessosProcessoIdRoute,
+    AuthenticatedProcessosIndexRoute: AuthenticatedProcessosIndexRoute,
+  }
+
+const AuthenticatedProcessosRouteWithChildren =
+  AuthenticatedProcessosRoute._addFileChildren(
+    AuthenticatedProcessosRouteChildren,
+  )
+
+interface AuthenticatedRouteRouteChildren {
+  AuthenticatedDiligenciasRoute: typeof AuthenticatedDiligenciasRoute
+  AuthenticatedProcessosRoute: typeof AuthenticatedProcessosRouteWithChildren
+  AuthenticatedIndexRoute: typeof AuthenticatedIndexRoute
 }
 
-const ProcessosRouteWithChildren = ProcessosRoute._addFileChildren(
-  ProcessosRouteChildren,
-)
+const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
+  AuthenticatedDiligenciasRoute: AuthenticatedDiligenciasRoute,
+  AuthenticatedProcessosRoute: AuthenticatedProcessosRouteWithChildren,
+  AuthenticatedIndexRoute: AuthenticatedIndexRoute,
+}
+
+const AuthenticatedRouteRouteWithChildren =
+  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  DiligenciasRoute: DiligenciasRoute,
+  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   LoginRoute: LoginRoute,
-  ProcessosRoute: ProcessosRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

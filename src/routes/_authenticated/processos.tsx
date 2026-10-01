@@ -1,6 +1,6 @@
 import { createFileRoute, Outlet } from "@tanstack/react-router";
 
-export const Route = createFileRoute("/processos")({
+export const Route = createFileRoute("/_authenticated/processos")({
   component: ProcessosLayout,
 });
 

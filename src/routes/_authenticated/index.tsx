@@ -7,7 +7,7 @@ import { STATUS_LIST } from "@/data/mockData";
 import { diasAte, ehUrgente, formatarDataHora, formatarMoeda } from "@/lib/pauta";
 import { cn } from "@/lib/utils";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/_authenticated/")({
   head: () => ({
     meta: [
       { title: "Painel — Pauta | Audiências e diligências jurídicas" },

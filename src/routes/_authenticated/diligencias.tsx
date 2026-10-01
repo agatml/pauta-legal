@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/select";
 import { STATUS_LIST, TIPOS_LIST } from "@/data/mockData";
 
-export const Route = createFileRoute("/diligencias")({
+export const Route = createFileRoute("/_authenticated/diligencias")({
   head: () => ({
     meta: [
       { title: "Diligências — Pauta" },

@@ -3,7 +3,7 @@ import { ChevronRight } from "lucide-react";
 import { AppShell } from "@/components/pauta/AppShell";
 import { usePauta } from "@/components/pauta/PautaProvider";
 
-export const Route = createFileRoute("/processos/")({
+export const Route = createFileRoute("/_authenticated/processos/")({
   head: () => ({
     meta: [
       { title: "Processos — Pauta" },
