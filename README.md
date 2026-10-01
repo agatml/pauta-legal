@@ -94,7 +94,7 @@ O projeto foi construído em ciclos de **prompt → teste → correção**, com 
 |---|---|---|---|---|---|
 | 1 | App completo com 4 telas, dados fictícios tipados e design responsivo | App gerado e navegável | Clique em processo sem efeito; logo sem link | Prompt 2 | 6,70 |
 | 2 | Página de detalhe do processo com rota própria e logo como atalho ao Painel | Funcionou | — | — | 4,20 |
-| 3 | Autenticação e proteção de rotas | Login implementado | Erro de validação de senha ("mínimo de 6 caracteres" mesmo com senha válida) | Correção planejada | `PREENCHER` |
+| 3 | Autenticação e proteção de rotas | Login implementado | Erro de validação de senha ("mínimo de 6 caracteres" mesmo com senha válida) | Correção planejada | `em teste` |
 
 ### Boas práticas adotadas
 
