@@ -36,11 +36,11 @@ Protótipo de aplicação web para advogados e escritórios acompanharem **proce
 
 | Painel | Diligências |
 |---|---|
-| `![Painel](docs/img/painel.png)` | `![Diligências](docs/img/diligencias.png)` |
+| `![Painel](images/painel-pauta.png)` | `![Diligências](images/diligencias-pauta.png)` |
 
 | Processos | Detalhe do processo |
 |---|---|
-| `![Processos](docs/img/processos.png)` | `![Detalhe](docs/img/detalhe.png)` |
+| `![Processos](images/processos-pauta.png)` | `![Detalhe](images/detalhes-pauta.png)` |
 
 ---
 
