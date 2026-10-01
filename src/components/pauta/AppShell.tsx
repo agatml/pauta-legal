@@ -1,8 +1,30 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useNavigate } from "@tanstack/react-router";
+import { useQueryClient } from "@tanstack/react-query";
 import { CalendarClock, FolderOpen, LayoutDashboard, LogOut, Menu, Scale } from "lucide-react";
 import { useState, type ReactNode } from "react";
 import { Button } from "@/components/ui/button";
+import { supabase } from "@/integrations/supabase/client";
 import { cn } from "@/lib/utils";
+
+function BotaoSair() {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  return (
+    <button
+      type="button"
+      onClick={async () => {
+        await queryClient.cancelQueries();
+        queryClient.clear();
+        await supabase.auth.signOut();
+        navigate({ to: "/login", replace: true });
+      }}
+      className="flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-primary-foreground/70 transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground"
+    >
+      <LogOut className="size-4" />
+      Sair
+    </button>
+  );
+}
 
 const navItens = [
   { to: "/", label: "Painel", icon: LayoutDashboard },
@@ -74,13 +96,7 @@ export function AppShell({
         <div className="mt-8 flex-1">
           <NavLinks />
         </div>
-        <Link
-          to="/login"
-          className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-primary-foreground/70 transition-colors hover:bg-primary-foreground/10 hover:text-primary-foreground"
-        >
-          <LogOut className="size-4" />
-          Sair
-        </Link>
+        <BotaoSair />
       </aside>
 
       <div className="lg:pl-64">
@@ -100,6 +116,9 @@ export function AppShell({
           {menuAberto && (
             <div className="border-t border-primary-foreground/10 px-4 pb-4 lg:hidden">
               <NavLinks onNavigate={() => setMenuAberto(false)} />
+              <div className="mt-1">
+                <BotaoSair />
+              </div>
             </div>
           )}
 
