@@ -25,7 +25,7 @@ export const Route = createFileRoute("/login")({
   component: Login,
 });
 
-function traduzirErro(error: { message: string; code?: string }): string {
+function traduzirErro(error: { message: string; code?: string | undefined }): string {
   if (error.code === "weak_password")
     return "Essa senha apareceu em vazamentos de dados ou é fácil demais de adivinhar. Escolha outra, única e mais longa.";
   const m = error.message.toLowerCase();
