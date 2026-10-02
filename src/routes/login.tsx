@@ -30,8 +30,16 @@ function traduzirErro(msg: string): string {
   if (m.includes("invalid login")) return "E-mail ou senha incorretos.";
   if (m.includes("email not confirmed"))
     return "Confirme seu e-mail antes de entrar (verifique sua caixa de entrada).";
-  if (m.includes("already registered")) return "Este e-mail já possui uma conta.";
-  if (m.includes("password")) return "A senha deve ter pelo menos 6 caracteres.";
+  if (m.includes("already registered") || m.includes("already been registered"))
+    return "Este e-mail já possui uma conta.";
+  if (m.includes("weak") || m.includes("easy to guess") || m.includes("breach") || m.includes("compromised") || m.includes("pwned"))
+    return "Essa senha apareceu em vazamentos de dados. Escolha outra, única e mais longa.";
+  if (m.includes("at least") && m.includes("character"))
+    return "A senha deve ter pelo menos 6 caracteres.";
+  if (m.includes("invalid") && m.includes("email"))
+    return "Informe um e-mail válido.";
+  if (m.includes("unable to validate email") || m.includes("email address") && m.includes("invalid"))
+    return "Informe um e-mail válido.";
   return "Não foi possível concluir. Tente novamente.";
 }
 
