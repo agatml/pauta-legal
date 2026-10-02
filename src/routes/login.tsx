@@ -25,13 +25,22 @@ export const Route = createFileRoute("/login")({
   component: Login,
 });
 
-function traduzirErro(msg: string): string {
-  const m = msg.toLowerCase();
+function traduzirErro(error: { message: string; code?: string | undefined }): string {
+  if (error.code === "weak_password")
+    return "Essa senha apareceu em vazamentos de dados ou é fácil demais de adivinhar. Escolha outra, única e mais longa.";
+  const m = error.message.toLowerCase();
   if (m.includes("invalid login")) return "E-mail ou senha incorretos.";
   if (m.includes("email not confirmed"))
     return "Confirme seu e-mail antes de entrar (verifique sua caixa de entrada).";
-  if (m.includes("already registered")) return "Este e-mail já possui uma conta.";
-  if (m.includes("password")) return "A senha deve ter pelo menos 6 caracteres.";
+  if (m.includes("already registered") || m.includes("already been registered"))
+    return "Este e-mail já possui uma conta.";
+  if (m.includes("breach") || m.includes("pwned") || m.includes("compromised") || m.includes("leaked"))
+    return "Essa senha apareceu em vazamentos de dados. Escolha outra, única e mais longa.";
+  if (m.includes("weak") || m.includes("at least") || m.includes("too short"))
+    return "A senha deve ter pelo menos 6 caracteres.";
+  if (m.includes("invalid email") || m.includes("unable to validate email"))
+    return "Informe um e-mail válido.";
+  if (m.includes("password")) return "Senha inválida. Use pelo menos 6 caracteres.";
   return "Não foi possível concluir. Tente novamente.";
 }
 
@@ -58,11 +67,15 @@ function Login() {
       setErro("Informe e-mail e senha.");
       return;
     }
+    if (senha.length < 6) {
+      setErro("A senha deve ter pelo menos 6 caracteres.");
+      return;
+    }
     setEnviando(true);
     if (modo === "entrar") {
       const { error } = await supabase.auth.signInWithPassword({ email, password: senha });
       setEnviando(false);
-      if (error) return setErro(traduzirErro(error.message));
+      if (error) return setErro(traduzirErro(error));
       navigate({ to: "/", replace: true });
     } else {
       const { data, error } = await supabase.auth.signUp({
@@ -71,7 +84,7 @@ function Login() {
         options: { emailRedirectTo: window.location.origin },
       });
       setEnviando(false);
-      if (error) return setErro(traduzirErro(error.message));
+      if (error) return setErro(traduzirErro(error));
       if (data.session) {
         navigate({ to: "/", replace: true });
       } else {
