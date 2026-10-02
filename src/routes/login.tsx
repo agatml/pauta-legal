@@ -25,8 +25,10 @@ export const Route = createFileRoute("/login")({
   component: Login,
 });
 
-function traduzirErro(msg: string): string {
-  const m = msg.toLowerCase();
+function traduzirErro(error: { message: string; code?: string }): string {
+  if (error.code === "weak_password")
+    return "Essa senha apareceu em vazamentos de dados ou é fácil demais de adivinhar. Escolha outra, única e mais longa.";
+  const m = error.message.toLowerCase();
   if (m.includes("invalid login")) return "E-mail ou senha incorretos.";
   if (m.includes("email not confirmed"))
     return "Confirme seu e-mail antes de entrar (verifique sua caixa de entrada).";
