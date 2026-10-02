@@ -66,6 +66,10 @@ function Login() {
       setErro("Informe e-mail e senha.");
       return;
     }
+    if (senha.length < 6) {
+      setErro("A senha deve ter pelo menos 6 caracteres.");
+      return;
+    }
     setEnviando(true);
     if (modo === "entrar") {
       const { error } = await supabase.auth.signInWithPassword({ email, password: senha });
