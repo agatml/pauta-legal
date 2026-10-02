@@ -14,8 +14,8 @@ Protótipo de aplicação web para advogados e escritórios acompanharem **proce
 |---|---|---|
 | 1 | Interface completa com dados fictícios (4 telas) | ✅ Concluída |
 | 2 | Detalhe do processo com rota própria + logo como atalho | ✅ Concluída |
-| 3 | Autenticação (cadastro, login, rotas protegidas) | 🔄 Em andamento |
-| 4 | Banco de dados: processos e diligências com RLS | ⏳ Planejada |
+| 3 | Autenticação (cadastro, login, rotas protegidas) | ✅ Concluída |
+| 4 | Banco de dados: processos e diligências com RLS | 🔄 Próxima etapa |
 | 5 | Status persistindo e painel com dados reais | ⏳ Planejada |
 | 6 | Testes finais, publicação e documentação | ⏳ Planejada |
 
@@ -94,7 +94,8 @@ O projeto foi construído em ciclos de **prompt → teste → correção**, com 
 |---|---|---|---|---|---|
 | 1 | App completo com 4 telas, dados fictícios tipados e design responsivo | App gerado e navegável | Clique em processo sem efeito; logo sem link | Prompt 2 | 6,70 |
 | 2 | Página de detalhe do processo com rota própria e logo como atalho ao Painel | Funcionou | — | — | 4,20 |
-| 3 | Autenticação e proteção de rotas | Login implementado | Erro de validação de senha ("mínimo de 6 caracteres" mesmo com senha válida) | Correção planejada | `em teste` |
+| 3 | Autenticação e proteção de rotas | Login e cadastro implementados | Erro "mínimo de 6 caracteres" mesmo com senha válida. Diagnóstico: o backend recusava senhas encontradas em vazamentos de dados e a tela exibia a mensagem errada | Prompt 4 | `PREENCHER` |
+| 4 | Tratamento de erros de cadastro/login com mensagens claras em português (senha vazada, curta, e-mail inválido ou já cadastrado) e desativação da confirmação de e-mail | Funcionou: cadastro e login operando | — | — | `PREENCHER` |
 
 ### Boas práticas adotadas
 
