@@ -75,7 +75,7 @@ function Login() {
     if (modo === "entrar") {
       const { error } = await supabase.auth.signInWithPassword({ email, password: senha });
       setEnviando(false);
-      if (error) return setErro(traduzirErro(error.message));
+      if (error) return setErro(traduzirErro(error));
       navigate({ to: "/", replace: true });
     } else {
       const { data, error } = await supabase.auth.signUp({
@@ -84,7 +84,7 @@ function Login() {
         options: { emailRedirectTo: window.location.origin },
       });
       setEnviando(false);
-      if (error) return setErro(traduzirErro(error.message));
+      if (error) return setErro(traduzirErro(error));
       if (data.session) {
         navigate({ to: "/", replace: true });
       } else {
