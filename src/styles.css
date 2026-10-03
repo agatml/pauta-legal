@@ -153,3 +153,22 @@
     cursor: not-allowed;
   }
 }
+
+/*
+ * Componentes primitivos (shadcn/Radix) aplicam a utilitária `cursor-default`
+ * aos itens interativos de menus e seletores, que vence qualquer regra de layer.
+ * Regras fora de layer têm precedência e restauram o comportamento desejado.
+ */
+:is(
+    [role="option"],
+    [role="menuitem"],
+    [role="menuitemcheckbox"],
+    [role="menuitemradio"],
+    [role="combobox"]
+  ).cursor-default {
+  cursor: pointer;
+}
+
+:is([role="option"], [role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"])[data-disabled] {
+  cursor: not-allowed;
+}
