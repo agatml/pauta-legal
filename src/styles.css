@@ -103,5 +103,72 @@
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: var(--font-sans);
+    /* Cursor padrão (seta) em todo o app, inclusive sobre textos e cards. */
+    cursor: default;
   }
+
+  /* Apenas campos digitáveis mantêm o cursor de texto (I-beam). */
+  input:not(
+      [type="checkbox"],
+      [type="radio"],
+      [type="button"],
+      [type="submit"],
+      [type="reset"],
+      [type="range"],
+      [type="file"],
+      [type="color"],
+      [type="image"]
+    ),
+  textarea {
+    cursor: text;
+  }
+
+  /* Tudo clicável recebe a mãozinha (especificidade 0 para não vencer o :disabled). */
+  :where(
+      a,
+      button,
+      select,
+      label,
+      summary,
+      [role="button"],
+      [role="link"],
+      [role="tab"],
+      [role="option"],
+      [role="menuitem"],
+      [role="checkbox"],
+      [role="radio"],
+      [role="switch"],
+      [role="combobox"],
+      [role="treeitem"],
+      [aria-haspopup],
+      input[type="checkbox"],
+      input[type="radio"],
+      input[type="range"]
+    ) {
+    cursor: pointer;
+  }
+
+  /* Elementos desabilitados: cursor de proibido. */
+  :is(button:disabled, input:disabled, select:disabled, textarea:disabled, [disabled], [aria-disabled="true"]) {
+    cursor: not-allowed;
+  }
+}
+
+/*
+ * Componentes primitivos (shadcn/Radix) aplicam a utilitária `cursor-default`
+ * aos itens interativos de menus e seletores, que vence qualquer regra de layer.
+ * Regras fora de layer têm precedência e restauram o comportamento desejado.
+ */
+:is(
+    [role="option"],
+    [role="menuitem"],
+    [role="menuitemcheckbox"],
+    [role="menuitemradio"],
+    [role="combobox"]
+  ).cursor-default {
+  cursor: pointer;
+}
+
+:is([role="option"], [role="menuitem"], [role="menuitemcheckbox"], [role="menuitemradio"])[data-disabled] {
+  cursor: not-allowed;
 }
